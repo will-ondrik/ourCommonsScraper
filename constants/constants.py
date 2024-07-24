@@ -15,11 +15,25 @@ reporting_periods = {
 
 
 # URL Information
- # MP_EXPENSES_PAGE_URL needs to have /YEAR/QUARTER appended to it
+ # MP_EXPENSES_PAGE_URL needs to have /YEAR/QUARTER/ + unique href value appended to it
 BASE_URL = 'https://www.ourcommons.ca'
-MP_EXPENSES_PAGE_URL = f"{BASE_URL}/proactivedisclosure/en/members"
+MP_EXPENSES_PAGE_URL = f"{BASE_URL}/proactivedisclosure/en/members/{YEAR}/{Q3}/"
 
 
 # Firefox/Selenium Constants
 FIREFOX_BINARY = '/opt/firefox/firefox'
 GECKO_DRIVER_EXECUTABLE = '/usr/local/bin/geckodriver'
+
+
+
+# Error Messages
+NO_TBODY_FOUND = 'No <tbody> element found in the HTML'
+
+
+# Tbody classes
+EXPENSES_MAIN_INFO = 'expenses-main-info'
+
+
+# General Strings
+EMPTY_STRING = ''
+NOT_LISTED = 'Not Listed'
