@@ -10,7 +10,7 @@ def write_to_file(sql_script):
                 line = line.replace("'NULL'", "NULL")                
             f.write(line + '\n')
         
-        f.write('\n\n')
+        f.write('\n')
     
     if sql_script[0][1] is not None:
         for line in sql_script[0][1]:
@@ -18,7 +18,7 @@ def write_to_file(sql_script):
                 line = line.replace("'NULL'", "NULL")     
             f.write(line + '\n')
         
-        f.write('\n\n')
+        f.write('\n')
 
     if sql_script[0][2] is not None:
         for line in sql_script[0][2]:
@@ -26,7 +26,7 @@ def write_to_file(sql_script):
                 line = line.replace("'NULL'", "NULL")     
             f.write(line + '\n')
         
-        f.write('\n\n')
+        f.write('\n')
 
     if sql_script[0][3] is not None:
         for line in sql_script[0][3]:
@@ -34,8 +34,7 @@ def write_to_file(sql_script):
                 line = line.replace("'NULL'", "NULL")     
             f.write(line + '\n')
         
-        f.write('\n\n')
+        f.write('\n')
 
-    f.write('-----------------------------------------------')
 
     f.close()
