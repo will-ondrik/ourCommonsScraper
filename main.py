@@ -48,24 +48,24 @@ def extract_data(driver, url):
         print('MP: ', mp_data)
 
         if travel_col_anchor:
-            print('extracting travel expenses...')
+            print('Extracting travel expenses...')
             travel_expense_data = extract_travel_expenses(driver, travel_col_anchor['href'])
-            print('extraction complete.')
+            print('Extraction complete.')
         else:
             print('No href found: Member has no travel expenses for this quarter.')
 
 
         if hospitality_col_anchor:
-            print('extracting hospitality expenses...')
+            print('Extracting hospitality expenses...')
             hospitality_expense_data = extract_hospitality_expenses(driver, hospitality_col_anchor['href'])
-            print('extraction complete.')
+            print('Extraction complete.')
         else:
             print('No href found - Member has no hospitality expenses for this quarter')
 
         if contract_col_anchor:
-            print('extracting contract expenses...')
+            print('Extracting contract expenses...')
             contract_expense_data = extract_contract_expenses(driver, contract_col_anchor['href'])
-            print('extraction complete.')
+            print('Extraction complete.')
         else:
             print('No href found - Member has no contract expenses for this quarter.')
 
@@ -76,15 +76,19 @@ def extract_data(driver, url):
             3: contract_expense_data
         })
         
-        print('sequelizing...')
+        print('Sequelizing member expense data...')
         sequelized_expense_data = sequelize_data(extracted_mp_data, REPORTING_TIME_PERIOD[0], REPORTING_TIME_PERIOD[1], YEAR, FISCAL_QUARTER)
-        print('sequelizing complete.')
-        print('writing to file...')
+        print('Sequelization complete.')
+        print('Writing to output file...')
         write_to_file(sequelized_expense_data)
-        print('sequelizing complete.')
+        print('Member data written to file.')
     end_time = time.time()
 
-    print('Program duration: ', end_time - start_time)
+
+    duration_in_seconds = end_time-start_time
+    minutes = int(duration_in_seconds // 60)
+    seconds = duration_in_seconds % 60
+    print(f"Program duration: {minutes} minutes and {seconds} seconds")
 
 
 
