@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.service import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
-from ourCommonsScraper.constants.constants import FIREFOX_BINARY, GECKO_DRIVER_EXECUTABLE 
+from constants.constants import FIREFOX_BINARY, GECKO_DRIVER_EXECUTABLE 
 
 def get_driver():
     # Configure Selenium WebDriver Options
