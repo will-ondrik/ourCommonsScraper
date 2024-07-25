@@ -1,7 +1,7 @@
-
+from constants.constants import REPORTING_TIME_PERIOD, YEAR, FISCAL_QUARTER
 def write_to_file(sql_script):
     print('SQL SCRIPT: ', sql_script)
-    f = open('expenses.sql', 'a')
+    f = open(f'{REPORTING_TIME_PERIOD[0]}-to-{REPORTING_TIME_PERIOD[1]}-Year:{YEAR}-Quarter:{FISCAL_QUARTER}.sql', 'a')
     f.write('\n')
     
     if sql_script[0][0] is not None:
