@@ -17,6 +17,7 @@ def sequelize(travel_data, startPeriod, endPeriod, year, quarter):
         return
     for data in travel_data:
         script.append(utils.expense_insert('travel', data['total_cost'], startPeriod, endPeriod, year, quarter))
+        script.append(utils.set_var_expense_id())
         script.append(travel_claim_insert(data['start_date'], data['end_date'], data['transportation_cost'], data['accommodation_cost'], data['meals_and_incidentals_cost'], data['regular_points_used'], data['special_points_used'], data['USA_points_used'], data['total_cost']))
         script.append(utils.set_var_claim_id())
 
