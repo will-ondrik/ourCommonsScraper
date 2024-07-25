@@ -7,7 +7,7 @@ from data_extraction.hospitality_expenses import extract_hospitality_expenses
 from data_extraction.contract_expenses import extract_contract_expenses
 from data_processing.sequelize import sequelize_data
 from fileIO.sql_script import write_to_file
-
+import time
 
 def main():
     driver = get_driver()
@@ -15,6 +15,7 @@ def main():
 
 
 def extract_data(driver, url):
+    start_time = time.time()
     driver.get(url)
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -81,7 +82,9 @@ def extract_data(driver, url):
         print('writing to file...')
         write_to_file(sequelized_expense_data)
         print('sequelizing complete.')
-        print('-------------------------------------------------------------')
+    end_time = time.time()
+
+    print('Program duration: ', end_time - start_time)
 
 
 
