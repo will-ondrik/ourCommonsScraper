@@ -7,3 +7,8 @@ def format_dollar_values(value):
         value = value.replace(char, '')
     
     return value
+
+
+def format_single_quotes_for_sql(word):
+    word = word.replace("'", "''")
+    return word
