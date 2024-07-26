@@ -4,7 +4,7 @@ def hospitality_claim_insert(date, location, attendance, purpose, total_cost):
     return f"INSERT INTO HospitalityClaim (expenseId, memberId, date, location, attendance, purpose, totalCost) VALUES (@expenseId, @mpId, '{date}', '{location}', {attendance}, '{purpose}', {total_cost});"
 
 def event_insert(claim_number, event_type, supplier, cost):
-    return f"INSERT INTO event (claimId, claimNumber, type, purpose, supplier, totalCost) VALUES (@claimId, '{claim_number}', '{event_type}', '{supplier}', {cost});"
+    return f"INSERT INTO Event (claimId, claimNumber, type, purpose, supplier, totalCost) VALUES (@claimId, '{claim_number}', '{event_type}', '{supplier}', {cost});"
 
 def sequelize(hospitality_data, startPeriod, endPeriod, year, quarter):
     script = []
