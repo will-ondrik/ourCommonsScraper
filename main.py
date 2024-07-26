@@ -81,7 +81,7 @@ def extract_data(driver, url):
         print('Sequelization complete.')
         print('Writing to output file...')
         write_to_file(sequelized_expense_data)
-        print('Member data written to file.')
+        print('Member data written to file successfully.\n-----------------------')
     end_time = time.time()
 
 
