@@ -1,5 +1,5 @@
 from constants.constants import BASE_URL, NO_TBODY_FOUND, EXPENSES_MAIN_INFO, EMPTY_STRING, NOT_LISTED
-from data_extraction.utils import format_dollar_values
+from data_extraction.utils import format_dollar_values, format_single_quotes_for_sql
 from bs4 import BeautifulSoup
 import time
 
@@ -41,7 +41,7 @@ def extract_travel_expenses(driver, href_value):
             regular_points = row.find_all('td', class_='text-nowrap text-right')[3].text.strip()
             special_points = row.find_all('td', class_='text-nowrap text-right')[4].text.strip()
             USA_points = row.find_all('td', class_='text-nowrap text-right')[5].text.strip()
-            total_cost = row.find_all('td', class_='text-nowrap text-right')[6].text.strip().replace('$', '')
+            total_cost = format_dollar_values(row.find_all('td', class_='text-nowrap text-right')[6].text.strip())
 
             
 
@@ -51,13 +51,18 @@ def extract_travel_expenses(driver, href_value):
                 row_data = row.find_all('td')
                 if len(row_data) == 6:
                     traveller = row_data[0].text.strip()
-                    traveller_name = traveller.split(',')
+                    traveller_name = None
+                    if not traveller:
+                        traveller_name = ['Not listed', 'Nost listed']
+                    else:
+                        traveller_name = traveller.split(',')
+
                     traveller_type = row_data[1].text.strip()
                     purpose_of_travel = row_data[2].text.strip()
                     travel_date = row_data[3].text.strip()
                     departure = row_data[4].text.strip()
                     destination = row_data[5].text.strip()
-
+                    print('Traveller: ', traveller_name)
                     nested_data.append({
                         'traveller_name': traveller_name,
                         'traveller_type': traveller_type,
@@ -69,19 +74,17 @@ def extract_travel_expenses(driver, href_value):
 
                 elif len(row_data) == 4:
                     traveller = row_data[0].text.strip()
-                    if traveller == '':
-                        traveller_name = 'not listed'
-                    else:
-                        traveller_name = traveller.split(',')
+                    traveller_name = traveller.split(',')
                     traveller_type = row_data[1].text.strip()
                     purpose_of_travel = row_data[2].text.strip()
                     city = row_data[3].text.strip()
-
                     nested_data.append({
                         'traveller_name': traveller_name,
                         'traveller_type': traveller_type,
                         'purpose_of_travel': purpose_of_travel,
-                        'destination' : city
+                        'travel_date': 'NULL',
+                        'departure': 'NULL',
+                        'destination': city
                     })
 
             travel_data.append({
