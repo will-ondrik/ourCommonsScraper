@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from constants.constants import BASE_URL, NO_TBODY_FOUND, EXPENSES_MAIN_INFO
-from data_extraction.utils import format_dollar_values
+from data_extraction.utils import format_dollar_values, format_single_quotes_for_sql
 import time
 
 def extract_event_type(event_row):
@@ -31,7 +31,7 @@ def extract_hospitality_expenses(driver, href_value):
             date = row_data[0].text.strip()
             location = row_data[1].text.strip()
             attendance = row_data[2].text.strip()
-            purpose = row_data[3].text.strip()
+            purpose = format_single_quotes_for_sql(row_data[3].text.strip())
             total = format_dollar_values(row_data[4].text.strip())
 
             nested_row_data = []
@@ -42,7 +42,7 @@ def extract_hospitality_expenses(driver, href_value):
             for row in nested_rows[1:len(nested_rows)-1]:
                 row_data = row.find_all('td')
                 claim_number = row_data[0].text.strip()
-                supplier = row_data[1].text.strip()
+                supplier = format_single_quotes_for_sql(row_data[1].text.strip())
                 cost = format_dollar_values(row_data[2].text.strip())
 
                 nested_row_data.append({
