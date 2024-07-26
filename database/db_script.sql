@@ -42,7 +42,7 @@ CREATE TABLE ParliamentaryAssociationsAndInterparliamentaryGroups (
 
 
 CREATE TABLE Expense (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     memberId INT NOT NULL,
     claimType VARCHAR(25) NOT NULL,
     cost FLOAT NOT NULL,
@@ -54,14 +54,14 @@ CREATE TABLE Expense (
 );
 
 CREATE TABLE TravelClaim (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     expenseId INT NOT NULL,
     memberId INT NOT NULL,
-    startDate DATE NOT NULL,
-    endDate DATE NOT NULL,
+    startDate DATE,
+    endDate DATE,
     transportationCosts FLOAT NOT NULL,
-    accomodationCosts FLOAT NOT NULL,
-    mealsAndIncidentals FLOAT NOT NULL,
+    accommodationCosts FLOAT NOT NULL,
+    mealsAndIncidentalsCosts FLOAT NOT NULL,
     regularPoints FLOAT NOT NULL,
     specialPoints FLOAT NOT NULL,
     usaPoints FLOAT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE TravelClaim (
 );
 
 CREATE TABLE HospitalityClaim (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     expenseId INT NOT NULL,
     memberId INT NOT NULL,
     date DATE NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE HospitalityClaim (
 );
 
 CREATE TABLE ContractClaim (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     expenseId INT NOT NULL,
     memberId INT NOT NULL,
     supplier VARCHAR(255) NOT NULL,
@@ -96,26 +96,26 @@ CREATE TABLE ContractClaim (
 );
 
 CREATE TABLE Traveller (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
     type VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Travel (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     travellerId INT NOT NULL,
     claimId INT NOT NULL,
-    date VARCHAR(50) NOT NULL,
-    departure VARCHAR(50) NOT NULL,
-    destination VARCHAR(50) NOT NULL,
+    date DATE,
+    departure VARCHAR(50),
+    destination VARCHAR(50),
     purpose TEXT NOT NULL,
     FOREIGN KEY (travellerId) REFERENCES Traveller(id),
     FOREIGN KEY (claimId) REFERENCES TravelClaim(id)
 );
 
 CREATE TABLE Event (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     claimId INT NOT NULL,
     claimNumber VARCHAR(25) NOT NULL,
     type TEXT NOT NULL,
@@ -123,3 +123,4 @@ CREATE TABLE Event (
     totalCost FLOAT NOT NULL,
     FOREIGN KEY (claimId) REFERENCES HospitalityClaim(id)
 );
+
