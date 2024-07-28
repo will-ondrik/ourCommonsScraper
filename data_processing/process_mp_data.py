@@ -1,11 +1,31 @@
 import data_processing.utils as utils
+from constants.constants import MP_LOOKUP, PREVIOUS_YEAR
 
-def mp_insert(first_name, last_name, constituency, caucus, salary):
-    return f"INSERT INTO MembersOfParliament (firstName, lastName, constituency, caucus, salary) VALUES ('{first_name}', '{last_name}', '{constituency}', '{caucus}', {salary});"
+def mp_insert(first_name, last_name, constituency, caucus):
+    return f"INSERT INTO MembersOfParliament (firstName, lastName, constituency, caucus) VALUES ('{first_name}', '{last_name}', '{constituency}', '{caucus}');"
+
+def existing_mp_insert(mpId):
+    return f"@SET mpId = {mpId};"
+
+def salary_insert(full_name, year, salary, travelSpending, hospitalitySpending, contractSpending):
+    return f"INSERT INTO SalaryAndSpending (memberId, memberName, year, salary, travelExpenses, hospitalityExpenses, contractExpenses) VALUES (@mpId, '{full_name}', {year}, {salary}, {travelSpending}, {hospitalitySpending}, {contractSpending});"
 
 def sequelize(mp_data):
     script = []
+    count = 1
     for row in mp_data:
-        script.append(mp_insert(row['first_name'], row['last_name'], row['constituency'], row['caucus'], row['salary']))        
-        script.append(utils.set_var_mp_id())
+        full_name = f"{row['first_name']} {row['last_name']}"
+
+        if full_name in MP_LOOKUP:
+            mpId = MP_LOOKUP[full_name]
+            script.append(existing_mp_insert(mpId))                
+
+        else:
+            MP_LOOKUP[full_name] = count
+            count += 1
+            
+            script.append(mp_insert(row['first_name'], row['last_name'], row['constituency'], row['caucus']))        
+            script.append(utils.set_var_mp_id())
+
+        script.append(salary_insert(full_name, PREVIOUS_YEAR, row['salary'], row['travel_expenses'], row['hospitality_expenses'], row['contract_expenses']))
     return script
