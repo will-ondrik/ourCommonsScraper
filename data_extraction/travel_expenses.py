@@ -34,7 +34,8 @@ def extract_travel_expenses(driver, href_value):
         row = rows[i]
         if 'expenses-main-info' in row.get('class', []):
             claimId = row.find('td', class_='text-nowrap').text.strip()
-            dateRange = split_date_range(row.find_all('td', class_='text-nowrap')[1].text.strip())
+            date_text = row.find_all('td', class_='text-nowrap')[1].text.strip()
+            dateRange = split_date_range(date_text) if date_text else ['NULL', 'NULL']
             transportation_cost = format_dollar_values(row.find_all('td', class_='text-nowrap text-right')[0].text.strip())
             accommodation_cost = format_dollar_values(row.find_all('td', class_='text-nowrap text-right')[1].text.strip())
             meals_and_incidentals_cost = format_dollar_values(row.find_all('td', class_='text-nowrap text-right')[2].text.strip())
@@ -53,7 +54,7 @@ def extract_travel_expenses(driver, href_value):
                     traveller = row_data[0].text.strip()
                     traveller_name = None
                     if not traveller:
-                        traveller_name = ['Not listed', 'Nost listed']
+                        traveller_name = ['Not listed', 'Not listed']
                     else:
                         traveller_name = traveller.split(',')
 
@@ -62,7 +63,6 @@ def extract_travel_expenses(driver, href_value):
                     travel_date = row_data[3].text.strip()
                     departure = row_data[4].text.strip()
                     destination = row_data[5].text.strip()
-                    print('Traveller: ', traveller_name)
                     nested_data.append({
                         'traveller_name': traveller_name,
                         'traveller_type': traveller_type,
