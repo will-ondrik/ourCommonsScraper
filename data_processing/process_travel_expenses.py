@@ -25,7 +25,6 @@ def sequelize(travel_data, startPeriod, endPeriod, year, quarter):
             return
         else:
             for nested_data in data['details']:
-                print('NESTED DATA: ', nested_data)
                 if nested_data.get('traveller_name')[0] == EMPTY_STRING:
                     script.append(traveller_insert(nested_data['traveller_name'][0].strip(), nested_data['traveller_name'][0], nested_data['traveller_type']))
                 else:
