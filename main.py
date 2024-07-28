@@ -1,5 +1,5 @@
 from web_driver.selenium_setup import get_driver
-from constants.constants import MP_EXPENSES_PAGE_URL, REPORTING_TIME_PERIOD, YEAR, FISCAL_QUARTER
+from constants.constants import MP_LOOKUP, MP_EXPENSES_PAGE_URL, REPORTING_TIME_PERIOD, PREVIOUS_YEAR, FISCAL_QUARTER
 from bs4 import BeautifulSoup
 from data_extraction.mp_data import extract_mp_data
 from data_extraction.travel_expenses import extract_travel_expenses
@@ -32,7 +32,6 @@ def extract_data(driver, url):
 
         # Extract row data
         row_data = row.find_all('td')
-
         # access columns to find elements with page hrefs
         travel_col = row_data[4]
         hospitality_col = row_data[5]
@@ -77,7 +76,7 @@ def extract_data(driver, url):
         })
         
         print('Sequelizing member expense data...')
-        sequelized_expense_data = sequelize_data(extracted_mp_data, REPORTING_TIME_PERIOD[0], REPORTING_TIME_PERIOD[1], YEAR, FISCAL_QUARTER)
+        sequelized_expense_data = sequelize_data(extracted_mp_data, REPORTING_TIME_PERIOD[0], REPORTING_TIME_PERIOD[1], PREVIOUS_YEAR, FISCAL_QUARTER)
         print('Sequelization complete.')
         print('Writing to output file...')
         write_to_file(sequelized_expense_data)
@@ -89,7 +88,7 @@ def extract_data(driver, url):
     minutes = int(duration_in_seconds // 60)
     seconds = duration_in_seconds % 60
     print(f"Program duration: {minutes} minutes and {seconds} seconds")
-
+    print(MP_LOOKUP)
 
 
 main()
