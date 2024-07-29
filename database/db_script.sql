@@ -3,8 +3,29 @@ CREATE TABLE MembersOfParliament (
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
     constituency VARCHAR(75) NOT NULL,
-    caucus VARCHAR(25) NOT NULL,
-    salary FLOAT NOT NULL
+    caucus VARCHAR(25) NOT NULL
+);
+
+CREATE TABLE SalaryAndSpending (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    memberId INT NOT NULL,
+    memberName VARCHAR(75) NOT NULL,
+    year INT NOT NULL,
+    salary FLOAT NOT NULL,
+    travelExpenses FLOAT,
+    hospitalityExpenses FLOAT,
+    contractExpenses FLOAT,
+    FOREIGN KEY (memberId) REFERENCES MembersOfParliament(id)
+);
+
+CREATE TABLE HouseOfCommmonsQuarterlySums (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    year INT NOT NULL,
+    quarter INT NOT NULL,
+    salaryTotal FLOAT NOT NULL,
+    travelTotal FLOAT NOT NULL,
+    hospitalityTotal FLOAT NOT NULL,
+    contractTotal FLOAT NOT NULL
 );
 
 CREATE TABLE Contact (
