@@ -51,9 +51,12 @@ def extract_travel_expenses(driver, href_value):
             for row in nested_row[1:]:
                 row_data = row.find_all('td')
                 if len(row_data) == 6:
-                    traveller = row_data[0].text.strip()
+                    traveller = row_data[0].text.strip().replace('Hon. ', '')
                     traveller_name = None
-                    if not traveller:
+
+                    if 'brandon aboultaif'.lower() == traveller.lower():
+                        traveller_name = ['Aboultaif', 'Brandon']
+                    elif not traveller:
                         traveller_name = ['Not listed', 'Not listed']
                     else:
                         traveller_name = traveller.split(',')
@@ -73,7 +76,7 @@ def extract_travel_expenses(driver, href_value):
                     })
 
                 elif len(row_data) == 4:
-                    traveller = row_data[0].text.strip()
+                    traveller = row_data[0].text.strip().replace('Hon. ', '')
                     traveller_name = traveller.split(',')
                     traveller_type = row_data[1].text.strip()
                     purpose_of_travel = row_data[2].text.strip()
