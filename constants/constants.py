@@ -1,7 +1,7 @@
 # Inserted into the MAIN_PAGE_URL in 'main.py' for specific data collection
 YEAR = 2022
 PREVIOUS_YEAR = 2021
-FISCAL_QUARTER = 1
+FISCAL_QUARTER = 2
 
 # Reporting Period Dates
 reporting_periods = {
@@ -11,7 +11,7 @@ reporting_periods = {
     'Q4': [f'{YEAR}-01-01', f'{YEAR}-03-31']
 }
 
-REPORTING_TIME_PERIOD = reporting_periods['Q1']
+REPORTING_TIME_PERIOD = reporting_periods['Q2']
 
 
 # URL Information
@@ -362,7 +362,7 @@ MP_LOOKUP = {
     'Denis Trudel': 318,
     'Ryan Turnbull': 319,
     'Tim Uppal': 320,
-    'Vacant Vacant22/q2': 321,
+    'Vacant Vacant20/q2': 321,
     'Tony Van Bynen': 322,
     'Adam van Koeverden': 323,
     'Tako Van Popta': 324,
@@ -396,14 +396,17 @@ MP_LOOKUP = {
     'Murray Rankin': 352,
     "Ya'ara Saks": 353,
     'Brigitte Sansoucy': 354,
-    'Vacant Vacant22/q3': 355,
+    'Vacant Vacant20/q3': 355,
     'Lenore Zann': 356,
     'Gordie Hogg': 357,
     'Linda Lapointe': 358,
     'Hélène Laverdière': 359,
     'Amarjeet Sohi': 360,
     'Karine Trudel': 361,
-    'Vacant Vacant22/q4': 362
+    'Vacant Vacant20/q4': 362,
+    'Brad Trost': 363,
+    'Vacant Vacant22/q1': 364,
+
 }
 
 
