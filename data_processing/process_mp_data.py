@@ -14,7 +14,8 @@ def sequelize(mp_data):
     script = []
     count = 1
     for row in mp_data:
-        full_name = f"{row['first_name']} {row['last_name']}"
+        print('Mp Data:', mp_data)
+        full_name = f"{row['first_name']} {row['last_name']}".replace('Hon. ', '')
 
         if full_name in MP_LOOKUP:
             mpId = MP_LOOKUP[full_name]
