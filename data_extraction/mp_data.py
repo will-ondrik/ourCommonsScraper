@@ -9,6 +9,9 @@ def extract_mp_data(row_data):
         last_name = name[0]
     else:
         first_name = name[1].strip().replace('Hon. ', '')
+        first_name = first_name.replace('Right ', '')
+        print('First name: ', first_name)
+
         last_name = name[0]
     
     constituency = row_data[1].text.strip()
