@@ -12,18 +12,16 @@ def salary_insert(full_name, year, salary, travelSpending, hospitalitySpending, 
 
 def sequelize(mp_data):
     script = []
-    count = 1
     for row in mp_data:
         print('Mp Data:', mp_data)
         full_name = f"{row['first_name']} {row['last_name']}".replace('Hon. ', '')
-
-        if full_name in MP_LOOKUP:
+        
+        if full_name in MP_LOOKUP and full_name is not 'Vacant Vacant':
             mpId = MP_LOOKUP[full_name]
             script.append(existing_mp_insert(mpId))                
 
         else:
-            MP_LOOKUP[full_name] = count
-            count += 1
+            MP_LOOKUP[full_name] = len(MP_LOOKUP) + 1
             
             script.append(mp_insert(row['first_name'], row['last_name'], row['constituency'], row['caucus']))        
             script.append(utils.set_var_mp_id())
