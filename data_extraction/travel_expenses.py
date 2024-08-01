@@ -60,12 +60,13 @@ def extract_travel_expenses(driver, href_value):
                         traveller_name = ['Not listed', 'Not listed']
                     else:
                         traveller_name = traveller.split(',')
-
+                        traveller_name[0] = format_single_quotes_for_sql(traveller_name[0])
+                        
                     traveller_type = row_data[1].text.strip()
-                    purpose_of_travel = row_data[2].text.strip()
+                    purpose_of_travel = format_single_quotes_for_sql(row_data[2].text.strip())
                     travel_date = row_data[3].text.strip()
-                    departure = row_data[4].text.strip()
-                    destination = row_data[5].text.strip()
+                    departure = format_single_quotes_for_sql(row_data[4].text.strip())
+                    destination = format_single_quotes_for_sql(row_data[5].text.strip())
                     nested_data.append({
                         'traveller_name': traveller_name,
                         'traveller_type': traveller_type,
@@ -78,9 +79,12 @@ def extract_travel_expenses(driver, href_value):
                 elif len(row_data) == 4:
                     traveller = row_data[0].text.strip().replace('Hon. ', '')
                     traveller_name = traveller.split(',')
+                    traveller_name[0] = format_single_quotes_for_sql(traveller_name[0])
+                    traveller_name[1] = format_single_quotes_for_sql(traveller_name[1])
+
                     traveller_type = row_data[1].text.strip()
-                    purpose_of_travel = row_data[2].text.strip()
-                    city = row_data[3].text.strip()
+                    purpose_of_travel = format_single_quotes_for_sql(row_data[2].text.strip())
+                    city = format_single_quotes_for_sql(row_data[3].text.strip())
                     nested_data.append({
                         'traveller_name': traveller_name,
                         'traveller_type': traveller_type,

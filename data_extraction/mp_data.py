@@ -1,4 +1,4 @@
-from data_extraction.utils import format_dollar_values
+from data_extraction.utils import format_dollar_values, format_single_quotes_for_sql
 
 def extract_mp_data(row_data):
     mp_data = []
@@ -9,13 +9,13 @@ def extract_mp_data(row_data):
         last_name = name[0]
     else:
         first_name = name[1].strip().replace('Hon. ', '')
-        first_name = first_name.replace('Right ', '')
+        first_name = format_single_quotes_for_sql(first_name.replace('Right ', ''))
         print('First name: ', first_name)
 
-        last_name = name[0]
+        last_name = format_single_quotes_for_sql(name[0])
     
-    constituency = row_data[1].text.strip()
-    caucus = row_data[2].text.strip()
+    constituency = format_single_quotes_for_sql(row_data[1].text.strip())
+    caucus = format_single_quotes_for_sql(row_data[2].text.strip())
     salary = format_dollar_values(row_data[3].text.strip())
     travel_expenses = format_dollar_values(row_data[4].text.strip())
     hospitality_expenses = format_dollar_values(row_data[5].text.strip())

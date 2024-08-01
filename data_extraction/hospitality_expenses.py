@@ -29,7 +29,7 @@ def extract_hospitality_expenses(driver, href_value):
         if EXPENSES_MAIN_INFO in row.get('class', []):
             row_data = row.find_all('td')
             date = row_data[0].text.strip()
-            location = row_data[1].text.strip()
+            location = format_single_quotes_for_sql(row_data[1].text.strip())
             attendance = row_data[2].text.strip()
             purpose = format_single_quotes_for_sql(row_data[3].text.strip())
             total = format_dollar_values(row_data[4].text.strip())
