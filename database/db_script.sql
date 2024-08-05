@@ -140,7 +140,7 @@ CREATE TABLE Event (
     claimId INT NOT NULL,
     claimNumber VARCHAR(25) NOT NULL,
     type TEXT NOT NULL,
-    supplier FLOAT NOT NULL,
+    supplier VARCHAR(100),
     totalCost FLOAT NOT NULL,
     FOREIGN KEY (claimId) REFERENCES HospitalityClaim(id)
 );
