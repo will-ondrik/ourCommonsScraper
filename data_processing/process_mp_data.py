@@ -5,7 +5,7 @@ def mp_insert(first_name, last_name, constituency, caucus):
     return f"INSERT INTO MembersOfParliament (firstName, lastName, constituency, caucus) VALUES ('{first_name}', '{last_name}', '{constituency}', '{caucus}');"
 
 def existing_mp_insert(mpId):
-    return f"@SET mpId = {mpId};"
+    return f"SET @mpId = {mpId};"
 
 def salary_insert(full_name, year, salary, travelSpending, hospitalitySpending, contractSpending):
     return f"INSERT INTO SalaryAndSpending (memberId, memberName, year, salary, travelExpenses, hospitalityExpenses, contractExpenses) VALUES (@mpId, '{full_name}', {year}, {salary}, {travelSpending}, {hospitalitySpending}, {contractSpending});"
