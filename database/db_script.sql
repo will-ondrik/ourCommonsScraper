@@ -96,7 +96,7 @@ CREATE TABLE HospitalityClaim (
     expenseId INT NOT NULL,
     memberId INT NOT NULL,
     date DATE NOT NULL,
-    location VARCHAR(50) NOT NULL,
+    location VARCHAR(75) NOT NULL,
     attendance INT NOT NULL,
     purpose TEXT NOT NULL,
     totalCost FLOAT NOT NULL,
@@ -118,9 +118,9 @@ CREATE TABLE ContractClaim (
 
 CREATE TABLE Traveller (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    firstName VARCHAR(50) NOT NULL,
-    lastName VARCHAR(50) NOT NULL,
-    type VARCHAR(50) NOT NULL
+    firstName VARCHAR(75) NOT NULL,
+    lastName VARCHAR(75) NOT NULL,
+    type VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Travel (
@@ -128,8 +128,8 @@ CREATE TABLE Travel (
     travellerId INT NOT NULL,
     claimId INT NOT NULL,
     date DATE,
-    departure VARCHAR(50),
-    destination VARCHAR(50),
+    departure VARCHAR(255),
+    destination VARCHAR(255),
     purpose TEXT NOT NULL,
     FOREIGN KEY (travellerId) REFERENCES Traveller(id),
     FOREIGN KEY (claimId) REFERENCES TravelClaim(id)
@@ -140,7 +140,7 @@ CREATE TABLE Event (
     claimId INT NOT NULL,
     claimNumber VARCHAR(25) NOT NULL,
     type TEXT NOT NULL,
-    supplier VARCHAR(100),
+    supplier VARCHAR(125),
     totalCost FLOAT NOT NULL,
     FOREIGN KEY (claimId) REFERENCES HospitalityClaim(id)
 );
