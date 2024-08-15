@@ -63,6 +63,7 @@ def extract_travel_expenses(driver, href_value):
                     else:
                         traveller_name = traveller.split(',')
                         traveller_name[0] = format_single_quotes_for_sql(traveller_name[0])
+                        traveller_name[1] = format_single_quotes_for_sql(traveller_name[1])
                         
                     traveller_type = row_data[1].text.strip()
                     purpose_of_travel = format_single_quotes_for_sql(row_data[2].text.strip())
